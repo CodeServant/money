@@ -7,5 +7,7 @@ description = "Rust safe money type"
 homepage = "https://github.com/CodeServant/money"
 repository = "https://github.com/CodeServant/money"
 readme = "README.md"
+keywords = ["money", "finance", "accounting"]
+categories = ["finance"]
 
 [dependencies]
