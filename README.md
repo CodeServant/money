@@ -1,3 +1,3 @@
 Rust money type.
 
-It is in early stage of development, but ultimately the goal is to be able to safely use it in financial apps, that needs reliability.
+It is in an early stage of development, but ultimately the goal is to be able to use it safely in financial apps that need reliability.
