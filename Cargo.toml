@@ -2,5 +2,10 @@
 name = "money"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "Rust safe money type"
+homepage = "https://github.com/CodeServant/money"
+repository = "https://github.com/CodeServant/money"
+readme = "README.md"
 
 [dependencies]
