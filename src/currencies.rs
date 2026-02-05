@@ -9,7 +9,7 @@ type MinorUnitsType = u32;
 
 /// Currency standard that have known decimal minor units like Crypto or ISO Currencies.
 pub trait CurrencyWIthMinorStd: CurrencyStd {
-    fn minor_units() -> MinorUnitsType;
+    fn minor_units(&self) -> MinorUnitsType;
 }
 
 type ISONumericType = u32;
@@ -20,7 +20,7 @@ pub trait HasISO4217Code<'a> {
 }
 
 /// Code string like USD, EUR, PLN etc.
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub struct ISO4217Alphabetic {
     code: String,
 }
@@ -76,9 +76,11 @@ impl TryFrom<String> for ISO4217Alphabetic {
     }
 }
 
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub struct ISO4217Currency {
     iso_alpha: ISO4217Alphabetic,
     iso_numeric: ISONumericType,
+    minor_units: MinorUnitsType,
 }
 
 impl<'a> HasISO4217Code<'a> for ISO4217Currency {
@@ -88,6 +90,14 @@ impl<'a> HasISO4217Code<'a> for ISO4217Currency {
 
     fn numeric_iso(&self) -> ISONumericType {
         self.iso_numeric
+    }
+}
+
+impl CurrencyStd for ISO4217Currency {}
+
+impl CurrencyWIthMinorStd for ISO4217Currency {
+    fn minor_units(&self) -> MinorUnitsType {
+        self.minor_units
     }
 }
 
