@@ -125,6 +125,7 @@ mod currency_tests {
         test("PL!", WrongISOReason::NonAlphabetic);
         test("PL1", WrongISOReason::NonAlphabetic);
         test("pln s", WrongISOReason::Length(5));
-        ISO4217Alphabetic::try_from("  pln ".to_owned()).unwrap();
+        let pln = ISO4217Alphabetic::try_from("  pln ".to_owned()).unwrap();
+        assert_eq!(pln.code, "PLN");
     }
 }
