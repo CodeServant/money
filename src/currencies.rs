@@ -1,4 +1,6 @@
-use std::hash::Hash;
+use std::{collections::HashMap, hash::Hash, sync::LazyLock};
+
+use rust_decimal::Decimal;
 
 /// Currency standard.
 pub trait CurrencyStd: Hash + Eq {}
@@ -26,3 +28,15 @@ pub struct ISO4217Currency {
     iso_alpha: ISO4217Alphabetic,
     iso_numeric: ISONumericType,
 }
+
+/// As of 2026 2 countries have non decimal rounding MGA and MRU.
+#[cfg(feature = "rounding_exceptions")]
+const rounding_exceptions: LazyLock<HashMap<ISONumericType, Decimal>> = LazyLock::new(|| {
+    let mut map = HashMap::<ISONumericType, Decimal>::new();
+    const MGA: u32 = 969;
+    const MRU: u32 = 929;
+    let min_change = Decimal::new(2, 1);
+    map.insert(MGA, min_change);
+    map.insert(MRU, min_change);
+    map
+});

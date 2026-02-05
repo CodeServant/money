@@ -12,3 +12,7 @@ categories = ["finance"]
 
 [dependencies]
 rust_decimal = "1.40.0"
+
+[features]
+default = ["rounding_exceptions"]
+rounding_exceptions = []
