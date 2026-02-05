@@ -15,8 +15,8 @@ pub trait CurrencyWIthMinorStd: CurrencyStd {
 type ISONumericType = u32;
 
 pub trait HasISO4217Code<'a> {
-    fn alphabetic_iso() -> &'a ISO4217Alphabetic;
-    fn numeric_iso() -> ISONumericType;
+    fn alphabetic_iso(&'a self) -> &'a ISO4217Alphabetic;
+    fn numeric_iso(&self) -> ISONumericType;
 }
 
 /// Code string like USD, EUR, PLN etc.
@@ -79,6 +79,16 @@ impl TryFrom<String> for ISO4217Alphabetic {
 pub struct ISO4217Currency {
     iso_alpha: ISO4217Alphabetic,
     iso_numeric: ISONumericType,
+}
+
+impl<'a> HasISO4217Code<'a> for ISO4217Currency {
+    fn alphabetic_iso(&'a self) -> &'a ISO4217Alphabetic {
+        &self.iso_alpha
+    }
+
+    fn numeric_iso(&self) -> ISONumericType {
+        self.iso_numeric
+    }
 }
 
 /// As of 2026 2 countries have non decimal rounding MGA and MRU.
