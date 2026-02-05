@@ -11,3 +11,4 @@ keywords = ["money", "finance", "accounting"]
 categories = ["finance"]
 
 [dependencies]
+rust_decimal = "1.40.0"
